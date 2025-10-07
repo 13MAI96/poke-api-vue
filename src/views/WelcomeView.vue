@@ -1,6 +1,6 @@
 <script setup>
-import ButtonComponent from '../components/Button.vue'
-import { inject, onMounted } from 'vue'
+import Button from '../components/Button.vue'
+import { inject } from 'vue'
 import { useRouter } from 'vue-router'
 
 const { toggleLoading } = inject('loading')
@@ -21,7 +21,7 @@ function goHome() {
     The digital encyclopedia created by Professor Oak is an invaluable tool to Trainers in the
     Pokémon world.
   </p>
-  <ButtonComponent type="basic" @click="goHome()">Get started</ButtonComponent>
+  <Button type="basic" @click="goHome()">Get started</Button>
 </template>
 
 <style>

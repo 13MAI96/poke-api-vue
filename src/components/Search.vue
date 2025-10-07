@@ -18,7 +18,7 @@ import IconSearch from './icons/IconSearch.vue'
   display: flex;
   justify-content: center;
   align-items: center;
-  width: calc(100vw - 2rem);
+  width: 100%;
   box-sizing: border-box;
   height: 50px;
   .search-container {
@@ -27,12 +27,12 @@ import IconSearch from './icons/IconSearch.vue'
     height: 100%;
     display: flex;
     .search-icon {
-      width: 20%;
+      width: 20px;
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: end;
-      margin-right: 0.5rem;
+      margin: 0 0.5rem;
     }
     .search-input {
       background-color: var(--background-color);
@@ -50,13 +50,6 @@ import IconSearch from './icons/IconSearch.vue'
     .search-input:target {
       border: none;
       outline: none;
-    }
-  }
-}
-@media (min-width: 640px) {
-  .search {
-    .search-container {
-      width: 50%;
     }
   }
 }
