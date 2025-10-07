@@ -1,15 +1,19 @@
-<template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
-</template>
+<script setup>
+import { inject, onMounted, ref } from 'vue'
+import { pokeApi } from '../services/api'
+import BottomBar from '@/components/BottomBar.vue'
+import Table from '@/components/Table.vue'
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
-</style>
+const { toggleLoading } = inject('loading')
+const list = ref()
+
+onMounted(async () => {
+  list.value = await pokeApi.getList()
+  toggleLoading(false)
+})
+</script>
+
+<template>
+  <Table :items="list"></Table>
+  <BottomBar></BottomBar>
+</template>

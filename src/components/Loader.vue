@@ -1,15 +1,19 @@
 <script setup lang="ts">
-    import IconPokeball from './icons/IconPokeball.vue';
+import IconPokeball from './icons/IconPokeball.vue'
 </script>
 
 <template>
   <div class="loader">
-    <IconPokeball class="bounce"/>
+    <IconPokeball class="bounce" />
   </div>
 </template>
 
 <style scoped>
 .loader {
+  background-color: var(--color-background);
+  position: fixed;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,12 +26,26 @@
   animation: bounce 1s ease infinite;
 }
 @keyframes bounce {
-    70% { transform:translateY(0%); }
-    80% { transform:translateY(-15%); }
-    90% { transform:translateY(0%); }
-    95% { transform:translateY(-7%); }
-    97% { transform:translateY(0%); }
-    99% { transform:translateY(-3%); }
-    100% { transform:translateY(0); }
+  70% {
+    transform: translateY(0%);
+  }
+  80% {
+    transform: translateY(-15%);
+  }
+  90% {
+    transform: translateY(0%);
+  }
+  95% {
+    transform: translateY(-7%);
+  }
+  97% {
+    transform: translateY(0%);
+  }
+  99% {
+    transform: translateY(-3%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 </style>

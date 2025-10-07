@@ -1,32 +1,20 @@
 <script setup lang="ts">
-  import { RouterLink, RouterView } from 'vue-router'
-  import Button from './components/Button.vue'
-  import Loader from './components/Loader.vue'
-  import { ref, provide } from 'vue'
+import { RouterView } from 'vue-router'
+import Loader from './components/Loader.vue'
+import { ref, provide, KeepAlive } from 'vue'
 
-  const loading = ref(false);
+const loading = ref<boolean>(false)
 
-  function toggleLoading() {
-    loading.value = !loading.value
-  }
+function toggleLoading(state: boolean | null) {
+  loading.value = state ?? !loading.value
+}
 
-  provide('loading', {loading, toggleLoading});
-
+provide('loading', { loading, toggleLoading })
 </script>
 
 <template>
-  <Loader v-if="loading"/>
-
-  <RouterView v-else/>
+  <Loader v-if="loading" />
+  <RouterView v-slot="{ Component }">
+    <component :is="Component" />
+  </RouterView>
 </template>
-
-<!-- <template >
- 
-  <Button text="Get started" type='basic' ></Button>
-  <Button text="All" type='menu' isDisabled></Button>
-  <Button text="Favorites" type='fav' isDisabled></Button>
-  <Button text="All" type='menu'></Button>
-  <Button text="Favorites" type='fav'></Button>
-
-  
-</template> -->
