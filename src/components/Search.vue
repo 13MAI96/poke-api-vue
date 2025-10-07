@@ -22,6 +22,7 @@ import IconSearch from './icons/IconSearch.vue'
   box-sizing: border-box;
   height: 50px;
   .search-container {
+    border-radius: 5px;
     width: 100%;
     box-shadow: 0 2px 10px var(--color-border);
     height: 100%;
