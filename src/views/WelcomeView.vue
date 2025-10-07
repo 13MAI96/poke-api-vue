@@ -13,23 +13,29 @@ function goHome() {
 </script>
 
 <template>
-  <div>
+  <div class="welcome-container">
     <img src="../assets/welcome.svg" />
+    <h3>Welcome to Pokédex</h3>
+    <p class="welcome-text">
+      The digital encyclopedia created by Professor Oak is an invaluable tool to Trainers in the
+      Pokémon world.
+    </p>
+    <Button type="basic" @click="goHome()">Get started</Button>
   </div>
-  <h3>Welcome to Pokédex</h3>
-  <p class="welcome-text">
-    The digital encyclopedia created by Professor Oak is an invaluable tool to Trainers in the
-    Pokémon world.
-  </p>
-  <Button type="basic" @click="goHome()">Get started</Button>
 </template>
 
 <style>
-.welcome-text {
+.welcome-container {
+  height: 100vh;
   width: 70%;
-  text-align: center;
-  margin: 1rem;
-}
-@media (min-width: 1024px) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .welcome-text {
+    width: 70%;
+    text-align: center;
+    margin: 1rem;
+  }
 }
 </style>

@@ -9,7 +9,7 @@ This template should help get you started developing with Vue 3 in Vite.
 ## Recommended Browser Setup
 
 - Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
+  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
   - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
 - Firefox:
   - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
@@ -40,3 +40,8 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### Por que no Vuex, Tailwind, axion o alguna otra libreria?
+
+La consigna no especifica el uso de alguna libreria, no solo en la necesidad de utilizarlo sino tampoco da lugar o abren la opcion de utilizar una libreria.
+He trabajado en el area bancaria donde la implementacion de alguna libreria deberia primero superar varios procesos de validacion de seguridad, por lo tanto no implemento librerias mas alla de las integradas en Vue, React o Angular a no ser de que esté especificado su uso o la posibilidad de usarla.
