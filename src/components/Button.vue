@@ -52,4 +52,10 @@ const props = defineProps({ type: String, isDisabled: Boolean })
 .button:hover {
   cursor: pointer;
 }
+
+@media (min-width: 640px) {
+  .button.lg {
+    width: 275px;
+  }
+}
 </style>
