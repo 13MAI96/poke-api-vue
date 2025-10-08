@@ -2,12 +2,24 @@
 import Search from './Search.vue'
 import Item from './Item.vue'
 import Button from './Button.vue'
+import Popup from './Popup.vue'
+import { ref } from 'vue'
+import type { PokemonItemList } from '@/models/pokemon-item-list.model'
 
-const props = defineProps(['items'])
+const props = defineProps(['items', 'actions'])
 
-function capitalize(txt: string) {
-  if (!txt) return ''
-  return txt.charAt(0).toUpperCase() + txt.slice(1)
+const popup = ref(false)
+const popupData = ref()
+function onFavClick(event: Event) {
+  console.log(event)
+}
+function onItemClick(event: { item: PokemonItemList }) {
+  popupData.value = props.actions.viewItemDetails(event.item, popupData)
+  popup.value = true
+}
+
+function closePopUp() {
+  popup.value = false
 }
 </script>
 
@@ -16,7 +28,13 @@ function capitalize(txt: string) {
     <Search></Search>
     <div class="table-container">
       <div class="table-list" v-if="props.items?.length > 0">
-        <Item v-for="item in props.items">{{ capitalize(item.name) }}</Item>
+        <Item
+          v-for="item in props.items"
+          class="table-item"
+          :item="item"
+          @on-fav-click="onFavClick($event)"
+          @on-item-click="onItemClick($event)"
+        ></Item>
       </div>
       <div v-else class="table-empty">
         <h3>Uh-oh!</h3>
@@ -25,6 +43,7 @@ function capitalize(txt: string) {
       </div>
     </div>
   </div>
+  <Popup v-if="popup" :data="popupData" @background-click="closePopUp()"></Popup>
 </template>
 
 <style scoped>
