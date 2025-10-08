@@ -41,4 +41,4 @@ Si bien el comando npm run dev es suficiente para inicializar el proyecto de man
 
 ## Para el despliegue en demo
 
-Para este caso el despliegue en demo se realiza directamente desde el repositorio publico con la utilizacion de Vercel. El dominio publico para acceder al ambiente es el siguiente: [text](https://poke-api-vue-eta.vercel.app/)
+Para este caso el despliegue en demo se realiza directamente desde el repositorio publico con la utilizacion de Vercel. El dominio publico para acceder al ambiente es el siguiente: [Pokédex Web](https://poke-api-vue-eta.vercel.app/)
