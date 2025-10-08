@@ -27,7 +27,7 @@ function goHome() {
 <style>
 .welcome-container {
   height: 100svh;
-  width: 70%;
+  width: 315px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,9 +40,14 @@ function goHome() {
     text-align: center;
   }
   .welcome-text {
-    width: 70%;
     text-align: center;
     margin: 1rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .welcome-container {
+    width: 570px;
   }
 }
 </style>
