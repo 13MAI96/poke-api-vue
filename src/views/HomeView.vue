@@ -14,9 +14,9 @@ const group_filter = ref<'All' | 'Fav'>('All')
 
 const tableActions = ref<TableActions>({
   viewItemDetails: async (item: PokemonItemList, ref: any) => {
-    toggleLoading()
+    // toggleLoading()
     ref.value = await apiService.getByName(item)
-    toggleLoading()
+    // toggleLoading()
   },
   toggleFav: (item: PokemonItemList) => {
     apiService.toggleFav(item)
@@ -27,6 +27,9 @@ const tableActions = ref<TableActions>({
   },
   goHome: () => {
     router.push('/')
+  },
+  toggleSpinner: () => {
+    toggleLoading()
   },
 })
 const apiService = new ApiService()

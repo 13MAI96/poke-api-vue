@@ -3,7 +3,7 @@ import Button from './Button.vue'
 import FavButton from './FavButton.vue'
 import IconClose from './icons/IconClose.vue'
 
-const emit = defineEmits(['backgroundClick', 'favClick', 'sharedWithFriends'])
+const emit = defineEmits(['backgroundClick', 'favClick', 'sharedWithFriends', 'loadImg'])
 
 const capitalize = (txt: string) => {
   if (!txt) return ''
@@ -18,7 +18,12 @@ const onCardClick = (event: Event) => {
 }
 const shareWithFriends = async () => {
   try {
-    await navigator.clipboard.writeText(JSON.stringify(props.data))
+    const types_string = Array.isArray(props.data.types)
+      ? props.data.types.join(', ')
+      : String(props.data.types)
+    await navigator.clipboard.writeText(
+      `${props.data.name}, ${props.data.weight}, ${props.data.height}, ${types_string}`,
+    )
     emit('sharedWithFriends')
   } catch (err) {
     console.error('Error al copiar:', err)
@@ -30,6 +35,10 @@ const onFavClick = () => {
   props.data.fav = !props.data.fav
 }
 
+const onLoadImg = () => {
+  emit('loadImg')
+}
+
 const props = defineProps(['data'])
 </script>
 
@@ -37,7 +46,7 @@ const props = defineProps(['data'])
   <div class="popup" @click="onBackgroundClick($event)">
     <div class="popup-container" @click="onCardClick($event)">
       <div class="popup-picture">
-        <img class="popup-img" :src="data.picture" />
+        <img class="popup-img" :src="data.picture" @load="onLoadImg()" />
         <div class="popup-close" @click="onBackgroundClick($event)">
           <IconClose></IconClose>
         </div>
