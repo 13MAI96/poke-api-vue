@@ -58,9 +58,8 @@ export class ApiService {
     localStorage.setItem('pokemon_list', JSON.stringify(this.public_store.pokemon_list))
   }
 
-  filterByText(text: string) {
-    return this.public_store.pokemon_list.filter(
-      (x) => x.name.toLowerCase().indexOf(text.toLowerCase()) > -1,
-    )
+  async filterByText(text: string, group: string) {
+    const list = await this.getList(group)
+    return list?.filter((x) => x.name.toLowerCase().indexOf(text.toLowerCase()) > -1)
   }
 }
