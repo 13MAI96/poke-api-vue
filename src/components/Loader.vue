@@ -20,6 +20,7 @@ import IconPokeball from './icons/IconPokeball.vue'
   width: 100%;
   height: 100vh;
   box-sizing: border-box;
+  z-index: 100;
 }
 
 .bounce {

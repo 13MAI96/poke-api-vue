@@ -8,16 +8,27 @@ const { toggleLoading } = inject('loading')
 const list = ref()
 const tableActions = ref({
   viewItemDetails: async (item, ref) => {
+    toggleLoading()
     ref.value = await apiService.getByName(item)
+    toggleLoading()
   },
-  markAsFav: () => {},
+  toggleFav: (item) => {
+    apiService.toggleFav(item)
+    updateList()
+  },
+  search: (text) => {
+    list.value = apiService.filterByText(text)
+  },
 })
 const apiService = new ApiService()
 
-onMounted(async () => {
-  apiService.getList().then((x) => {
+const updateList = async () =>
+  await apiService.getList().then((x) => {
     list.value = x
   })
+
+onMounted(async () => {
+  await updateList()
   toggleLoading(false)
 })
 </script>

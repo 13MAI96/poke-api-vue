@@ -11,8 +11,10 @@ export class ApiService {
 
   async getList() {
     try {
-      if (this._pokemon_list.length > 0) {
-        return this._pokemon_list
+      const list = JSON.parse(localStorage.getItem('pokemon_list') ?? '[]')
+      if (list.length > 0) {
+        this._pokemon_list = list
+        return list
       } else {
         const res = await fetch(this.apiUrl)
         const data = await res.json()
@@ -45,5 +47,18 @@ export class ApiService {
     } catch (err) {
       console.error(err)
     }
+  }
+
+  toggleFav(item: PokemonItemList) {
+    console.log(item)
+    this._pokemon_list = this._pokemon_list.map((x) => {
+      if (x.name == item.name) x.fav = !x.fav
+      return x
+    })
+    localStorage.setItem('pokemon_list', JSON.stringify(this._pokemon_list))
+  }
+
+  filterByText(text: string) {
+    return this._pokemon_list.filter((x) => x.name.toLowerCase().indexOf(text.toLowerCase()) > -1)
   }
 }
