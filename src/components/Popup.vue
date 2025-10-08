@@ -18,7 +18,6 @@ const onCardClick = (event: Event) => {
 }
 const shareWithFriends = async () => {
   try {
-    console.log(props.data)
     await navigator.clipboard.writeText(JSON.stringify(props.data))
     emit('sharedWithFriends')
   } catch (err) {
