@@ -5,7 +5,7 @@ import { ref, provide, KeepAlive } from 'vue'
 
 const loading = ref<boolean>(false)
 
-function toggleLoading(state: boolean | null) {
+const toggleLoading = (state: boolean | null) => {
   loading.value = state ?? !loading.value
 }
 

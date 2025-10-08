@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router'
 const { toggleLoading } = inject<any>('loading')
 const router = useRouter()
 
-function goHome() {
+const goHome = () => {
   toggleLoading()
   router.push('/home')
 }

@@ -14,13 +14,13 @@ const popup = ref(false)
 const popupData = ref<Pokemon>()
 const snackbar = ref({ status: false, message: '' })
 
-function onFavClick(event: { item: PokemonItemList }) {
+const onFavClick = (event: { item: PokemonItemList }) => {
   props.actions.toggleFav(event.item)
   const pokemon = event.item
   snackbar.value.message = `${pokemon.fav ? 'Added' : 'Removed'} ${pokemon.name} ${pokemon.fav ? 'to' : 'from'} favorites.`
   snackbar.value.status = true
 }
-function onItemClick(event: { item: PokemonItemList }) {
+const onItemClick = (event: { item: PokemonItemList }) => {
   popupData.value = props.actions.viewItemDetails(event.item, popupData)
   popup.value = true
   props.actions.toggleSpinner()
