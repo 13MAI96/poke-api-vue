@@ -1,9 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import Button from '../components/Button.vue'
 import { inject } from 'vue'
 import { useRouter } from 'vue-router'
 
-const { toggleLoading } = inject('loading')
+const { toggleLoading } = inject<any>('loading')
 const router = useRouter()
 
 function goHome() {

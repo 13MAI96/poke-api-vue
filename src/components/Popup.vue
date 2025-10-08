@@ -3,7 +3,7 @@ import Button from './Button.vue'
 import FavButton from './FavButton.vue'
 import IconClose from './icons/IconClose.vue'
 
-const emit = defineEmits(['backgroundClick', 'favClick'])
+const emit = defineEmits(['backgroundClick', 'favClick', 'sharedWithFriends'])
 
 const capitalize = (txt: string) => {
   if (!txt) return ''
@@ -20,8 +20,7 @@ const shareWithFriends = async () => {
   try {
     console.log(props.data)
     await navigator.clipboard.writeText(JSON.stringify(props.data))
-    // copied.value = true
-    // setTimeout(() => (copied.value = false), 1500)
+    emit('sharedWithFriends')
   } catch (err) {
     console.error('Error al copiar:', err)
   }
