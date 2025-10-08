@@ -6,11 +6,12 @@ import Popup from './Popup.vue'
 import { ref } from 'vue'
 import type { PokemonItemList } from '@/models/pokemon-item-list.model'
 import Snackbar from './Snackbar.vue'
+import type { Pokemon } from '@/models/pokemon.model'
 
 const props = defineProps(['items', 'actions'])
 
 const popup = ref(false)
-const popupData = ref()
+const popupData = ref<Pokemon>()
 const snackbar = ref({ status: false, message: '' })
 
 function onFavClick(event: { item: PokemonItemList }) {
@@ -39,6 +40,15 @@ const onShare = () => {
 const goHome = () => {
   props.actions.goHome()
 }
+
+const onPopupFavClick = (event: { item: PokemonItemList }) => {
+  props.actions.toggleFav(event.item)
+  const pokemon = event.item
+  snackbar.value = {
+    message: `${pokemon.fav ? 'Removed' : 'Added'} ${pokemon.name} ${pokemon.fav ? 'from' : 'to'} favorites.`,
+    status: true,
+  }
+}
 </script>
 
 <template>
@@ -55,8 +65,8 @@ const goHome = () => {
         ></Item>
       </div>
       <div v-else class="table-empty">
-        <h3>Uh-oh!</h3>
-        <p class="welcome-text">You look lost on your journey!</p>
+        <h3 class="table-title">Uh-oh!</h3>
+        <p class="table-text">You look lost on your journey!</p>
         <Button type="basic" @click="goHome()">Go back home</Button>
       </div>
     </div>
@@ -65,7 +75,7 @@ const goHome = () => {
     v-if="popup"
     :data="popupData"
     @background-click="closePopUp()"
-    @fav-click="onFavClick($event)"
+    @fav-click="onPopupFavClick($event)"
     @shared-with-friends="onShare()"
   ></Popup>
   <Snackbar v-if="snackbar.status" @close="snackbar.status = false">{{
@@ -94,6 +104,20 @@ const goHome = () => {
       justify-content: center;
       align-items: center;
       padding: 4rem 2rem;
+      .table-title {
+        font-family: Lato;
+        font-weight: 700;
+        font-size: 36px;
+        line-height: 100%;
+        text-align: center;
+      }
+      .table-text {
+        font-family: Lato;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 150%;
+        padding-bottom: 25px;
+      }
     }
     .table-list {
       max-height: 100%;

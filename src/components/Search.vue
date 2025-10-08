@@ -16,7 +16,13 @@ const searchEvent = () => {
       <div class="search-icon">
         <IconSearch></IconSearch>
       </div>
-      <input class="search-input" type="text" v-model="search_text" @keyup="searchEvent()" />
+      <input
+        class="search-input"
+        type="text"
+        v-model="search_text"
+        @keyup="searchEvent()"
+        placeholder="Search"
+      />
     </div>
   </div>
 </template>
@@ -59,6 +65,9 @@ const searchEvent = () => {
     .search-input:target {
       border: none;
       outline: none;
+    }
+    .search-input::placeholder {
+      color: #bfbfbf;
     }
   }
 }
