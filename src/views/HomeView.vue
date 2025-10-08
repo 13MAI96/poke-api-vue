@@ -22,8 +22,8 @@ const tableActions = ref<TableActions>({
     apiService.toggleFav(item)
     updateList()
   },
-  search: (text: string) => {
-    list.value = apiService.filterByText(text)
+  search: async (text: string) => {
+    list.value = await apiService.filterByText(text, group_filter.value)
   },
   goHome: () => {
     router.push('/')
