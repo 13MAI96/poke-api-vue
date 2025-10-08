@@ -1,5 +1,13 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import IconSearch from './icons/IconSearch.vue'
+
+const emit = defineEmits(['search'])
+const search_text = ref()
+
+const searchEvent = () => {
+  emit('search', { input: search_text.value })
+}
 </script>
 
 <template>
@@ -8,7 +16,7 @@ import IconSearch from './icons/IconSearch.vue'
       <div class="search-icon">
         <IconSearch></IconSearch>
       </div>
-      <input class="search-input" type="text" />
+      <input class="search-input" type="text" v-model="search_text" @keyup="searchEvent()" />
     </div>
   </div>
 </template>

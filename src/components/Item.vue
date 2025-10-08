@@ -5,13 +5,11 @@ const props = defineProps(['item'])
 const emit = defineEmits(['onFavClick', 'onItemClick'])
 
 function onFavClick(event: Event) {
-  console.log(event, props.item)
   event.stopPropagation()
   emit('onFavClick', { event: event, item: props.item })
 }
 
 function onItemClick(event: Event) {
-  console.log(event, 'onItemClick')
   emit('onItemClick', { item: props.item })
 }
 
@@ -27,7 +25,7 @@ function capitalize(txt: string) {
       {{ capitalize(props.item.name) }}
     </p>
     <div class="item-fav-icon" @click="onFavClick($event)">
-      <FavButton></FavButton>
+      <FavButton :isChecked="props.item.fav"></FavButton>
     </div>
   </div>
 </template>

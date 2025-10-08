@@ -6,7 +6,7 @@ export class Pokemon {
   fav!: boolean
   picture!: string
 
-  constructor(public data: any) {
+  constructor(data: any) {
     Object.assign(this, data)
   }
 }

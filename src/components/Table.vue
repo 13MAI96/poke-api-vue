@@ -10,22 +10,26 @@ const props = defineProps(['items', 'actions'])
 
 const popup = ref(false)
 const popupData = ref()
-function onFavClick(event: Event) {
-  console.log(event)
+function onFavClick(event: { item: PokemonItemList }) {
+  props.actions.toggleFav(event.item)
 }
 function onItemClick(event: { item: PokemonItemList }) {
   popupData.value = props.actions.viewItemDetails(event.item, popupData)
   popup.value = true
 }
 
-function closePopUp() {
+const closePopUp = () => {
   popup.value = false
+}
+
+const onSearch = (event: any) => {
+  props.actions.search(event.input)
 }
 </script>
 
 <template>
   <div class="table">
-    <Search></Search>
+    <Search @search="onSearch($event)"></Search>
     <div class="table-container">
       <div class="table-list" v-if="props.items?.length > 0">
         <Item
@@ -43,7 +47,12 @@ function closePopUp() {
       </div>
     </div>
   </div>
-  <Popup v-if="popup" :data="popupData" @background-click="closePopUp()"></Popup>
+  <Popup
+    v-if="popup"
+    :data="popupData"
+    @background-click="closePopUp()"
+    @fav-click="onFavClick($event)"
+  ></Popup>
 </template>
 
 <style scoped>

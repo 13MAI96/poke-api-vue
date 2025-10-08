@@ -3,18 +3,33 @@ import Button from './Button.vue'
 import FavButton from './FavButton.vue'
 import IconClose from './icons/IconClose.vue'
 
-const emit = defineEmits(['backgroundClick'])
+const emit = defineEmits(['backgroundClick', 'favClick'])
 
-function capitalize(txt: string) {
+const capitalize = (txt: string) => {
   if (!txt) return ''
   return txt.charAt(0).toUpperCase() + txt.slice(1)
 }
 
-function onBackgroundClick(event: Event) {
+const onBackgroundClick = (event: Event) => {
   emit('backgroundClick')
 }
-function onCardClick(event: Event) {
+const onCardClick = (event: Event) => {
   event.stopPropagation()
+}
+const shareWithFriends = async () => {
+  try {
+    console.log(props.data)
+    await navigator.clipboard.writeText(JSON.stringify(props.data))
+    // copied.value = true
+    // setTimeout(() => (copied.value = false), 1500)
+  } catch (err) {
+    console.error('Error al copiar:', err)
+  }
+}
+
+const onFavClick = () => {
+  emit('favClick', { item: props.data })
+  props.data.fav = !props.data.fav
 }
 
 const props = defineProps(['data'])
@@ -55,8 +70,8 @@ const props = defineProps(['data'])
         </div>
       </div>
       <div class="popup-actions">
-        <Button>Share to my friends</Button>
-        <FavButton></FavButton>
+        <Button @click="shareWithFriends()">Share to my friends</Button>
+        <FavButton :isChecked="props.data.fav" @click="onFavClick()"></FavButton>
       </div>
     </div>
   </div>
