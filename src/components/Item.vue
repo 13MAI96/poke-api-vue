@@ -4,16 +4,16 @@ import FavButton from './FavButton.vue'
 const props = defineProps(['item'])
 const emit = defineEmits(['onFavClick', 'onItemClick'])
 
-function onFavClick(event: Event) {
+const onFavClick = (event: Event) => {
   event.stopPropagation()
   emit('onFavClick', { event: event, item: props.item })
 }
 
-function onItemClick(event: Event) {
+const onItemClick = (event: Event) => {
   emit('onItemClick', { item: props.item })
 }
 
-function capitalize(txt: string) {
+const capitalize = (txt: string) => {
   if (!txt) return ''
   return txt.charAt(0).toUpperCase() + txt.slice(1)
 }
