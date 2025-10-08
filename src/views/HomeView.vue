@@ -9,7 +9,7 @@ import type { PokemonItemList } from '@/models/pokemon-item-list.model'
 const { toggleLoading } = inject<any>('loading')
 const list = ref()
 const router = useRouter()
-const groupFilter = ref<'All' | 'Fav'>('All')
+const group_filter = ref<'All' | 'Fav'>('All')
 
 const tableActions = ref({
   viewItemDetails: async (item: PokemonItemList, ref: any) => {
@@ -31,12 +31,12 @@ const tableActions = ref({
 const apiService = new ApiService()
 
 const updateList = async () =>
-  await apiService.getList(groupFilter.value).then((x) => {
+  await apiService.getList(group_filter.value).then((x) => {
     list.value = x
   })
 
 const onFilterByGroup = (e: { filter: 'All' | 'Fav' }) => {
-  groupFilter.value = e.filter
+  group_filter.value = e.filter
   updateList()
 }
 
@@ -48,5 +48,5 @@ onMounted(async () => {
 
 <template>
   <Table :items="list" :actions="tableActions"></Table>
-  <BottomBar :group="groupFilter" @filter="onFilterByGroup($event)"></BottomBar>
+  <BottomBar :group="group_filter" @filter="onFilterByGroup($event)"></BottomBar>
 </template>

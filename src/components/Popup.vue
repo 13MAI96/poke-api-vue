@@ -69,7 +69,7 @@ const props = defineProps(['data'])
         </div>
       </div>
       <div class="popup-actions">
-        <Button @click="shareWithFriends()">Share to my friends</Button>
+        <Button @click="shareWithFriends()" type="basic">Share to my friends</Button>
         <FavButton :isChecked="props.data.fav" @click="onFavClick()"></FavButton>
       </div>
     </div>
