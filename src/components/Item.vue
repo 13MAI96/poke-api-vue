@@ -1,13 +1,32 @@
 <script setup lang="ts">
 import FavButton from './FavButton.vue'
+
+const props = defineProps(['item'])
+const emit = defineEmits(['onFavClick', 'onItemClick'])
+
+function onFavClick(event: Event) {
+  console.log(event, props.item)
+  event.stopPropagation()
+  emit('onFavClick', { event: event, item: props.item })
+}
+
+function onItemClick(event: Event) {
+  console.log(event, 'onItemClick')
+  emit('onItemClick', { item: props.item })
+}
+
+function capitalize(txt: string) {
+  if (!txt) return ''
+  return txt.charAt(0).toUpperCase() + txt.slice(1)
+}
 </script>
 
 <template>
-  <div class="item">
+  <div class="item" @click="onItemClick($event)">
     <p class="item-text">
-      <slot></slot>
+      {{ capitalize(props.item.name) }}
     </p>
-    <div class="item-fav-icon">
+    <div class="item-fav-icon" @click="onFavClick($event)">
       <FavButton></FavButton>
     </div>
   </div>
@@ -15,9 +34,6 @@ import FavButton from './FavButton.vue'
 
 <style scoped>
 .item {
-  :hover {
-    cursor: pointer;
-  }
   margin: 5px 0;
   display: flex;
   justify-content: space-between;
@@ -26,7 +42,7 @@ import FavButton from './FavButton.vue'
   height: 50px;
   background-color: white;
   .item-fav-icon {
-    width: 20%;
+    width: 50px;
     height: 100%;
     display: flex;
     align-items: center;
@@ -34,6 +50,7 @@ import FavButton from './FavButton.vue'
     margin: 0 0.5rem;
   }
   .item-text {
+    width: calc(100% - 50px);
     padding-left: 20px;
     font-family: Lato;
     font-weight: 500;
@@ -41,6 +58,9 @@ import FavButton from './FavButton.vue'
     line-height: 100%;
     vertical-align: middle;
   }
+}
+.item:hover {
+  cursor: pointer;
 }
 @media (min-width: 640px) {
   .search {

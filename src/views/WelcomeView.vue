@@ -26,7 +26,7 @@ function goHome() {
 
 <style>
 .welcome-container {
-  height: 100vh;
+  height: 100svh;
   width: 70%;
   display: flex;
   flex-direction: column;

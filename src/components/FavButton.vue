@@ -20,5 +20,6 @@ const props = defineProps({ isChecked: Boolean })
 }
 .fav-button:hover {
   border: #bfbfbf80 1px solid;
+  cursor: pointer;
 }
 </style>

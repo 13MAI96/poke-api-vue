@@ -17,7 +17,7 @@ const props = defineProps({ type: String, isDisabled: Boolean })
 
 <style scoped>
 .button {
-  border-radius: 16px;
+  border-radius: 60px;
   min-width: 150px;
   height: 44px;
   padding: 11px 20px;
@@ -48,5 +48,8 @@ const props = defineProps({ type: String, isDisabled: Boolean })
     display: flex;
     align-items: end;
   }
+}
+.button:hover {
+  cursor: pointer;
 }
 </style>
