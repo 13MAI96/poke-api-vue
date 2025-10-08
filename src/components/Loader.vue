@@ -18,13 +18,13 @@ import IconPokeball from './icons/IconPokeball.vue'
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: 100svh;
   box-sizing: border-box;
   z-index: 100;
 }
 
 .bounce {
-  animation: bounce 1s ease infinite;
+  animation: bounce 0.5s ease infinite;
 }
 @keyframes bounce {
   70% {

@@ -21,8 +21,8 @@ onMounted(() => {
 <style scoped>
 .snackbar {
   position: fixed;
-  bottom: 15px;
-  right: calc(50vw - 125px);
+  bottom: 95px;
+  right: 15px;
   width: 250px;
   height: 30px;
   border: none;

@@ -86,7 +86,7 @@ const goHome = () => {
   .table-container {
     width: 100%;
     padding: 20px 0;
-    max-height: calc(100vh - 170px);
+    max-height: calc(100svh - 170px);
     overflow-y: scroll;
     .table-empty {
       display: flex;
