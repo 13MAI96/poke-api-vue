@@ -15,7 +15,7 @@ function goHome() {
 <template>
   <div class="welcome-container">
     <img src="../assets/welcome.svg" />
-    <h3>Welcome to Pokédex</h3>
+    <h3 class="welcome-title">Welcome to Pokédex</h3>
     <p class="welcome-text">
       The digital encyclopedia created by Professor Oak is an invaluable tool to Trainers in the
       Pokémon world.
@@ -32,6 +32,13 @@ function goHome() {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  .welcome-title {
+    font-family: Lato;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 100%;
+    text-align: center;
+  }
   .welcome-text {
     width: 70%;
     text-align: center;

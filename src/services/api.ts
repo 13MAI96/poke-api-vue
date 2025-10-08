@@ -1,28 +1,27 @@
 import { PokemonItemList } from '@/models/pokemon-item-list.model'
 import { Pokemon } from '@/models/pokemon.model'
-import { computed, ref } from 'vue'
+import { store } from './store'
 
 export class ApiService {
   private apiUrl: string = 'https://pokeapi.co/api/v2/pokemon'
-
-  private _pokemon_list: PokemonItemList[] = JSON.parse(
-    localStorage.getItem('pokemon_list') ?? '[]',
-  )
+  private public_store = store
 
   async getList(group: string) {
     try {
       const list: PokemonItemList[] = JSON.parse(localStorage.getItem('pokemon_list') ?? '[]')
       if (list.length > 0) {
-        this._pokemon_list = list
+        this.public_store.update(list)
         return group == 'All' ? list : list.filter((x) => x.fav)
       } else {
         const res = await fetch(this.apiUrl)
         const data = await res.json()
-        this._pokemon_list = data.results.map((poke: any) => {
-          return new PokemonItemList(poke.name, poke.url)
-        }) as PokemonItemList[]
-        localStorage.setItem('pokemon_list', JSON.stringify(this._pokemon_list))
-        return this._pokemon_list
+        this.public_store.update(
+          data.results.map((poke: any) => {
+            return new PokemonItemList(poke.name, poke.url)
+          }) as PokemonItemList[],
+        )
+        localStorage.setItem('pokemon_list', JSON.stringify(this.public_store.pokemon_list))
+        return this.public_store.pokemon_list
       }
     } catch (err) {
       console.error(err)
@@ -50,14 +49,18 @@ export class ApiService {
   }
 
   toggleFav(item: PokemonItemList) {
-    this._pokemon_list = this._pokemon_list.map((x) => {
-      if (x.name == item.name) x.fav = !x.fav
-      return x
-    })
-    localStorage.setItem('pokemon_list', JSON.stringify(this._pokemon_list))
+    this.public_store.update(
+      this.public_store.pokemon_list.map((x) => {
+        if (x.name == item.name) x.fav = !x.fav
+        return x
+      }),
+    )
+    localStorage.setItem('pokemon_list', JSON.stringify(this.public_store.pokemon_list))
   }
 
   filterByText(text: string) {
-    return this._pokemon_list.filter((x) => x.name.toLowerCase().indexOf(text.toLowerCase()) > -1)
+    return this.public_store.pokemon_list.filter(
+      (x) => x.name.toLowerCase().indexOf(text.toLowerCase()) > -1,
+    )
   }
 }

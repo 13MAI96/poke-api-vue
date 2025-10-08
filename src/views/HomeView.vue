@@ -5,13 +5,14 @@ import BottomBar from '@/components/BottomBar.vue'
 import Table from '@/components/Table.vue'
 import { useRouter } from 'vue-router'
 import type { PokemonItemList } from '@/models/pokemon-item-list.model'
+import { TableActions } from '@/models/table-actions.model'
 
 const { toggleLoading } = inject<any>('loading')
 const list = ref()
 const router = useRouter()
 const group_filter = ref<'All' | 'Fav'>('All')
 
-const tableActions = ref({
+const tableActions = ref<TableActions>({
   viewItemDetails: async (item: PokemonItemList, ref: any) => {
     toggleLoading()
     ref.value = await apiService.getByName(item)
