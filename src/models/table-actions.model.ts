@@ -3,4 +3,5 @@ export class TableActions {
   toggleFav!: (x: any) => void
   search!: (x: string) => void
   goHome!: () => void
+  toggleSpinner!: () => void
 }

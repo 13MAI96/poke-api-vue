@@ -23,6 +23,7 @@ function onFavClick(event: { item: PokemonItemList }) {
 function onItemClick(event: { item: PokemonItemList }) {
   popupData.value = props.actions.viewItemDetails(event.item, popupData)
   popup.value = true
+  props.actions.toggleSpinner()
 }
 
 const closePopUp = () => {
@@ -48,6 +49,10 @@ const onPopupFavClick = (event: { item: PokemonItemList }) => {
     message: `${pokemon.fav ? 'Removed' : 'Added'} ${pokemon.name} ${pokemon.fav ? 'from' : 'to'} favorites.`,
     status: true,
   }
+}
+
+const onLoadImg = () => {
+  props.actions.toggleSpinner()
 }
 </script>
 
@@ -77,6 +82,7 @@ const onPopupFavClick = (event: { item: PokemonItemList }) => {
     @background-click="closePopUp()"
     @fav-click="onPopupFavClick($event)"
     @shared-with-friends="onShare()"
+    @load-img="onLoadImg()"
   ></Popup>
   <Snackbar v-if="snackbar.status" @close="snackbar.status = false">{{
     snackbar.message
